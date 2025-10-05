@@ -39,7 +39,7 @@ Now I want to share some experiments and my thought about those. Many of theme c
 
 Before these sharing, I want to give you some more intuitive results.
 
-# Just Infer (Jupyter Notebook)
+## Just Infer (Jupyter Notebook)
 
 **Step1. Get ready for environment**
 
@@ -66,9 +66,9 @@ DOWNLOAD FROM: https://pan.baidu.com/s/16ijZbdVoRHFUciq-dohl2g?pwd=j2qb
 
 **Step3. Run inferring.ipynb, and modify the path in Config to your local path**
 
-# Infer and Visualize (Command)
+## Infer and Visualize (Command)
 
-## Competition dataset
+### Competition dataset
 
 Prepare conda environment:
 
@@ -119,13 +119,13 @@ python visul.py -i ISICDM2025_test_001.png
 
 Replace `ISICDM2025_test_001.png` to any competition test image.
 
-## Local data
+### Local data
 
 Approach 1. Create a document to save your local data, and modify `Config.TEST_IMG_DIR `to your local path. The same goes for other `Config path`.
 
 Approach 2. Delete the contents of `Config.TEST_IMG_DIR` and place the local data in this path （if you already have the document).
 
-# Fine-tune the model weight files trained from external data (Jupyter Notebook)
+## Fine-tune the model weight files trained from external data (Jupyter Notebook)
 
 512_efficientnet_b0_expand.pth is pretrained weight of head model from external data
 
@@ -137,13 +137,13 @@ Approach 2. Delete the contents of `Config.TEST_IMG_DIR` and place the local dat
 
 **Step3. Run yolo-ft.ipynb, and modify the path in Config to your local path**
 
-# Visualization (Jupyter Notebook)
+## Visualization (Jupyter Notebook)
 
 Run Visual.ipynb
 
-# SOME RESULTS ABOUT THIS COMPETITION
+## SOME RESULTS ABOUT THIS COMPETITION
 
-## IMBALANCE!
+### IMBALANCE!
 
 <img src="./figures/isicdm2025fig/f2.jpg" alt="f2" style="zoom: 50%;" />
 
@@ -153,7 +153,7 @@ There are too many Bi-Rads 0 compared to other categories, which is VERY IMBALAN
 
 As mentioned earlier, the Bi-Rads 0 accounts for almost 90% of the competition data. From this, we infer that the private score will also have a similar data distribution. Considering that the external dataset is much larger than the training data provided by the competition, we did not use mixed data training (external dataset and competition dataset are used simultaneously in a single training phase) during training. Instead, we adopted a two-stage training strategy (first using the external dataset to adjust the distribution of model weight parameters and then using the competition dataset to fine-tune the model parameters). After experiments, the Bi-Rads 0 proportion in the inference results of mixed data training is much smaller than that of two-stage training. 
 
-## model size
+### model size
 
 I use 384 x 384, 512 x 512, 768 x 768 for detector and classification model training. Detectors and convolution classifiers of different sizes can capture different details of medical images, and until the end I tried to figure out how to fuse the inference results of models of different scales.
 
@@ -172,17 +172,17 @@ I use 384 x 384, 512 x 512, 768 x 768 for detector and classification model trai
 
 Poor performance of minority classes will lower the overall mAP. As I said before, the detection model can be optimized into a detector that only detects lesions (separating background and lesions) and does not need to identify different categories, the mAP50 is greatly increased except 384 x 384.
 
-## Model Training
+### Model Training
 
-### Stage1. Fine-tuning initial pretrained model
+**Stage1. Fine-tuning initial pretrained model**
 
 ![f4](./figures/isicdm2025fig/f4.png)
 
-### Stage2. Fine-tuning the VinDr-Mammo + Inbreast trained model
+**Stage2. Fine-tuning the VinDr-Mammo + Inbreast trained model**
 
 ![f5](./figures/isicdm2025fig/f5.png)
 
-## Post process: NMS vs. unsupervised learning
+### Post process: NMS vs. unsupervised learning
 
 NMS is a common post-processing tool for target detection tasks, which reduces duplicate target boxes based on IoU. However, if all boxes are classified into the same category, NMS won't be particularly effective. This requires a strict setting of the IoU threshold (default 0.5). Observing the YOLO results, it's easy to see that the boxes are clustered, and the centers of densely overlapping boxes are almost identical. I believe it's the characteristics of these central overlapping areas that lead the algorithm to identify them as potential lesions. If these overlapping boxes are correctly classified, then they are all correct, because the highlighted area is precisely the central overlapping area. In other words, only the box with the highest confidence in the overlapping area needs to be retained. Therefore, choosing an unsupervised learning algorithm (Kmeans) to directly cluster the center points can perfectly solve this problem. Compared to the NMS parameter adjustment, the Kmeans algorithm directly obtains the classification result by calculating the distance between the center points.
 
@@ -215,7 +215,7 @@ When S get max value, the cluster is in its best distribution.
 
 
 
-## Other Useful Strategy
+### Other Useful Strategy
 
 ```
 transforms.Normalize(mean=MEAN, std=STD)
