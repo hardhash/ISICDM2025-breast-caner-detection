@@ -157,12 +157,12 @@ I use 384 x 384, 512 x 512, 768 x 768 for detector and classification model trai
 
 | model size     | Stage            | image size | val_mAP50(7 cls) | val_mAP50(background) | val_Acc    | val_loss     |
 | -------------- | ---------------- | ---------- | ---------------- | --------------------- | ---------- | ------------ |
-| yolov8p        | External data    | 384        | -                | 24.20%                | -          | -            |
-| yolov8p        | External data    | 512        | -                | 26.33%                | -          | -            |
-| yolov8p        | External data    | 768        | -                | 31.57%                | -          | -            |
-| yolov8p        | Competition data | 384        | **26.38%**       | 16.37%                | -          | -            |
-| yolov8p        | Competition data | 512        | 6.06%            | **12.48%**            | -          | -            |
-| yolov8p        | Competition data | 768        | 6.71%            | 10.03%                | -          | -            |
+| yolov8n        | External data    | 384        | -                | 24.20%                | -          | -            |
+| yolov8n        | External data    | 512        | -                | 26.33%                | -          | -            |
+| yolov8n        | External data    | 768        | -                | 31.57%                | -          | -            |
+| yolov8n        | Competition data | 384        | **26.38%**       | 16.37%                | -          | -            |
+| yolov8n        | Competition data | 512        | 6.06%            | **12.48%**            | -          | -            |
+| yolov8n        | Competition data | 768        | 6.71%            | 10.03%                | -          | -            |
 | EfficientNetb0 | External data    | 768        | -                | -                     | 60.83%     | 0.898200     |
 | EfficientNetb0 | Competition data | 384        | -                | -                     | 85.71%     | 0.419585     |
 | EfficientNetb0 | Competition data | 512        | -                | -                     | **91.07%** | **0.418896** |
