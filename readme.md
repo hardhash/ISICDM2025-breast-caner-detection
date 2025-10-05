@@ -4,7 +4,6 @@
 
 *Update 10/04/2025*
 
-# Content
 - [Just Infer (Jupyter Notebook)](#just-infer-jupyter-notebook)
 - [Infer and Visualize (Command)](#infer-and-visualize-command)
 - [Competition dataset](#competition-dataset)
