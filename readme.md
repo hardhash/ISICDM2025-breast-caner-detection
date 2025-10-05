@@ -56,8 +56,6 @@ timm=1.0.19
 
 **Step2. Download the trained weight files we provide**
 
-DOWNLOAD FROM: https://pan.baidu.com/s/16ijZbdVoRHFUciq-dohl2g?pwd=j2qb 
-
 512_efficientnet_b0_fold_{1-5}.pth are the weight files for EfficientNetB0
 
 512yolov8.pt is the weight file for YOLOv8
