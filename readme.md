@@ -6,16 +6,14 @@
 
 - [Just Infer (Jupyter Notebook)](#just-infer-jupyter-notebook)
 - [Infer and Visualize (Command)](#infer-and-visualize-command)
-- [Competition dataset](#competition-dataset)
-- [Local data](#local-data)
+  - [Competition dataset](#competition-dataset)
+  - [Local data](#local-data)
 - [Fine-tune the model weight files trained from external data (Jupyter Notebook)](#fine-tune-the-model-weight-files-trained-from-external-data-jupyter-notebook)
 - [SOME RESULTS ABOUT THIS COMPETITION](#some-results-about-this-competition)
-- [IMBALANCE!](#imbalance)
-- [model size](#model-size)
-- [Stage1. Fine-tuning initial pretrained model](#stage1-fine-tuning-initial-pretrained-model)
-- [Stage2. Fine-tuning the VinDr-Mammo + Inbreast trained model](#stage2-fine-tuning-the-vindr-mammo--inbreast-trained-model)
-- [Post process: NMS vs. unsupervised learning](#post-process-nms-vs-unsupervised-learning)
-- [Other Useful Strategy](#other-useful-strategy)
+  - [IMBALANCE!](#imbalance)
+  - [model size](#model-size)
+  - [Post process: NMS vs. unsupervised learning](#post-process-nms-vs-unsupervised-learning)
+  - [Other Useful Strategy](#other-useful-strategy)
 
 
 First of all, I would like to thank ISICDM and competition's host for such an amazing challenge, a lofty goal with high data quality.
