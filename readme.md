@@ -37,6 +37,8 @@ Now I want to share some experiments and my thought about those. Many of theme c
 
 Before these sharing, I want to give you some more intuitive results.
 
+**Note: .ipynb (Jupyter) files in `./notebooks/jupyter notebook`, .py (command) files in `./src`**
+
 ## Just Infer (Jupyter Notebook)
 
 **Step1. Get ready for environment**
