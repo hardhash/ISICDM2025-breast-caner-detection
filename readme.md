@@ -189,6 +189,7 @@ However, the Kmeans algorithm requires manual selection of the number of cluster
 Here I prefer to Idea 2.
 
 I choice a silhouette method.
+
 $$
 a(i)=\frac{1}{|c_i|-1}\sum_{j \in c_i,j \notin i}d(x_i,x_j)
 $$
