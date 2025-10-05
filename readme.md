@@ -107,7 +107,7 @@ Multi-image display:
 python visul.py -m
 ```
 
-Max 9 pictures display. Modify `Config.visual_gap` value to adjust the start number of displayed image. 
+Max 9 iamges could be displayed. Modify `Config.visual_gap` value to adjust the start number of displayed image. 
 
 Single image display:
 
