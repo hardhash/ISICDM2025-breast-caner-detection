@@ -1,10 +1,9 @@
-# ISICDM2025钼靶影像乳腺癌检测比赛方案
+# ISICDM2025 Q4 Breast Cancer Detection Solution
 
 
 
 *Update 10/04/2025*
 
-[TOC]
 
 First of all, I would like to thank ISICDM and competition's host for such an amazing challenge, a lofty goal with high data quality.
 
@@ -21,7 +20,7 @@ Use some external datasets: VinDr-Mammo、Inbreast.
 
 Background detection and classification (head) model: YOLOv8n + EfficientNet-B0 validated on 5-folds splits of competition data. YOLO is trained via [ultralytics](https://github.com/ultralytics/ultralytics). EfficientNet is trained via [timm](https://timm.fast.ai/).
 
-![f1](C:\Users\Administrator\OneDrive\Desktop\isicdm2025fig\f1.png)
+![f1](./figures/isicdm2025fig/f1.png)
 
 Now I want to share some experiments and my thought about those. Many of theme could be found in another discussions by excellent competitors. Many of theme seem obvious. Hope this helps some new comer getting started in the future. Kindly note that it's just my own opinion/thoughts with very limited experiments and knownledge. I'm appreciated for your discussions and feel free to correct me if something was wrong.
 
@@ -133,11 +132,11 @@ Run Visual.ipynb
 
 ## IMBALANCE!
 
-<img src="C:\Users\Administrator\OneDrive\Desktop\isicdm2025fig\f2.jpg" alt="f2" style="zoom: 50%;" />
+<img src="./figures/isicdm2025fig/f2.jpg" alt="f2" style="zoom: 50%;" />
 
 There are too many Bi-Rads 0 compared to other categories, which is VERY IMBALANCE! To solve this problem, I chose to remove the classifier from the detection model, pre-train a powerful classification head on large-scale data, and then fine-tune it on this extremely imbalanced dataset. This approach has significant benefits: it allows the model to learn more characteristics of other categories, greatly enhancing the robustness of the model. Once this approach is chosen, the detection model can be optimized into a detector that only detects lesions (separating background and lesions) and does not need to identify different categories. I think these two core skills are the main reasons that led us to the rematch.
 
-<img src="C:\Users\Administrator\OneDrive\Desktop\isicdm2025fig\f5.png" alt="f5" style="zoom:87%;" />
+<img src="./figures/isicdm2025fig/f3.png" alt="f5" style="zoom:87%;" />
 
 As mentioned earlier, the Bi-Rads 0 accounts for almost 90% of the competition data. From this, we infer that the private score will also have a similar data distribution. Considering that the external dataset is much larger than the training data provided by the competition, we did not use mixed data training (external dataset and competition dataset are used simultaneously in a single training phase) during training. Instead, we adopted a two-stage training strategy (first using the external dataset to adjust the distribution of model weight parameters and then using the competition dataset to fine-tune the model parameters). After experiments, the Bi-Rads 0 proportion in the inference results of mixed data training is much smaller than that of two-stage training. 
 
@@ -164,11 +163,11 @@ Poor performance of minority classes will lower the overall mAP. As I said befor
 
 ### Stage1. Fine-tuning initial pretrained model
 
-![f2](C:\Users\Administrator\OneDrive\Desktop\isicdm2025fig\f2.png)
+![f4](./figures/isicdm2025fig/f4.png)
 
 ### Stage2. Fine-tuning the VinDr-Mammo + Inbreast trained model
 
-![f4](C:\Users\Administrator\OneDrive\Desktop\isicdm2025fig\f4.png)
+![f5](./figures/isicdm2025fig/f5.png)
 
 ## Post process: NMS vs. unsupervised learning
 
@@ -199,7 +198,7 @@ $$
 
 When S get max value, the cluster is in its best distribution. 
 
-![f6](C:\Users\Administrator\OneDrive\Desktop\isicdm2025fig\f6.png)
+![f6](./figures/isicdm2025fig/f6.png)
 
 
 
@@ -217,6 +216,6 @@ transforms.Normalize(mean=MEAN, std=STD)
 
 4. Image enhancement based on picture window data , for example VOILUT.
 
-   <img src="C:\Users\Administrator\OneDrive\Desktop\isicdm2025fig\f3.png" alt="f3" style="zoom:67%;" />
+   <img src="./figures/isicdm2025fig/f7.png" alt="f3" style="zoom:67%;" />
 
    
